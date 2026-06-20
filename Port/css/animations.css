@@ -1,0 +1,260 @@
+/* ==========================================================================
+   Animations — Personal Portfolio
+   Keyframes and transition utilities.
+   Only `transform` and `opacity` are animated — no layout-triggering
+   properties (top, margin, height, width, etc.) — ensuring GPU compositing.
+   Requirements: 12.1, 12.2, 12.3, 14.2
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   @keyframes — Intro screen
+   -------------------------------------------------------------------------- */
+
+/**
+ * fade-scale-in: used for intro logo entrance.
+ * Animates from invisible + scaled-down → fully visible + full scale.
+ */
+@keyframes fade-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/**
+ * fade-out: used for intro overlay dismissal.
+ * Animates from fully visible → invisible.
+ */
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   @keyframes — Entrance animations
+   -------------------------------------------------------------------------- */
+
+/**
+ * fade-in-slide-up: used for hero name, section headings.
+ * Slides up 30px while fading in.
+ */
+@keyframes fade-in-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * slide-in-left: used for CTA buttons (primary).
+ * Slides in from the left while fading in.
+ */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/**
+ * slide-in-right: used for CTA buttons (secondary) or complementary elements.
+ * Slides in from the right while fading in.
+ */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/**
+ * slide-in-up: used for cards, tags — subtle upward entrance.
+ * Smaller offset (20px) than fade-in-slide-up for secondary elements.
+ */
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utility animation classes — applied via JavaScript
+   `will-change` is applied by JS before animation starts and removed after.
+   -------------------------------------------------------------------------- */
+
+/**
+ * .animate-fade-scale-in
+ * Applied by JS to the intro logo element.
+ */
+.animate-fade-scale-in {
+  animation: fade-scale-in 0.6s ease-out both;
+}
+
+/**
+ * .animate-fade-out
+ * Applied by JS to the intro overlay to dismiss it.
+ */
+.animate-fade-out {
+  animation: fade-out 0.5s ease-in both;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll-triggered entrance — [data-animate]
+   Elements start hidden; JS adds `.is-visible` via IntersectionObserver.
+   -------------------------------------------------------------------------- */
+
+/**
+ * Default: fade-in + slide-up 20px.
+ * Applied to all [data-animate] elements not otherwise specified.
+ */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/**
+ * Variant: fade-up — same behaviour as default, explicit alias.
+ */
+[data-animate="fade-up"] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-animate="fade-up"].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/**
+ * Variant: slide-left — enters from the left.
+ */
+[data-animate="slide-left"] {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-animate="slide-left"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/**
+ * Variant: slide-right — enters from the right.
+ */
+[data-animate="slide-right"] {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-animate="slide-right"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   Hero entrance elements — .hero-entrance
+   Applied via JS with optional data-delay for sequencing.
+   JS reads `data-delay` and sets `transition-delay` inline before adding
+   `.is-visible`, then removes `will-change` in the transitionend handler.
+   -------------------------------------------------------------------------- */
+
+.hero-entrance {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.hero-entrance.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Stagger support
+   The JS staggerChildren() assigns data-delay values; the ScrollAnimator
+   reads them and passes them to setTimeout before adding .is-visible.
+   No CSS needed beyond the existing [data-animate] rules above — stagger
+   timing is handled entirely in JS.
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   Reduced motion — accessibility
+   Respects the user's OS-level "prefers reduced motion" setting.
+   All animated elements are shown immediately with no transitions or
+   keyframe animations.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate],
+  [data-animate].is-visible {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-animate="fade-up"],
+  [data-animate="fade-up"].is-visible,
+  [data-animate="slide-left"],
+  [data-animate="slide-left"].is-visible,
+  [data-animate="slide-right"],
+  [data-animate="slide-right"].is-visible {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-entrance,
+  .hero-entrance.is-visible {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-fade-scale-in {
+    animation: none;
+    opacity: 1;
+  }
+
+  .animate-fade-out {
+    animation: none;
+    opacity: 1;
+  }
+
+  .intro-name {
+    animation: none;
+    opacity: 1;
+  }
+}

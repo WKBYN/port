@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Layout — Personal Portfolio
+   Page structure, section containers, responsive grid.
+   Requirements: 14.2
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base Reset & Box-Sizing
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Body
+   -------------------------------------------------------------------------- */
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;   /* 17px base — scales all em-based children */
+  background-color: var(--color-beige-50);
+  color: var(--color-text-primary);
+  scroll-behavior: smooth;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   #intro — Luxury minimalist intro overlay
+   Flat warm beige; removed from DOM after butterfly sequence completes.
+   -------------------------------------------------------------------------- */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #F5EBDD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   #main-content — Primary content wrapper
+   Sections stacked vertically.
+   -------------------------------------------------------------------------- */
+#main-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   Section — Base layout
+   Consistent vertical rhythm; centered content with max-width container.
+   -------------------------------------------------------------------------- */
+section {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+  padding-inline: var(--space-xl);
+  max-width: 1200px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   #hero — Full-viewport landing section
+   -------------------------------------------------------------------------- */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  /* Override section max-width so background decorations can bleed full-width */
+  max-width: 100%;
+  padding-inline: var(--space-xl);
+}
+
+#hero .hero-content {
+  max-width: 1200px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   #about — About card (flex row)
+   -------------------------------------------------------------------------- */
+#about .about-card {
+  display: flex;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--color-beige-100);
+  border-radius: var(--radius-card);
+  padding: var(--space-2xl);
+}
+
+/* --------------------------------------------------------------------------
+   #skills — Skills grid (wrapping flex)
+   -------------------------------------------------------------------------- */
+#skills .skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* --------------------------------------------------------------------------
+   #projects — Projects grid (auto-fill responsive grid)
+   -------------------------------------------------------------------------- */
+#projects .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-xl);
+}
+
+/* --------------------------------------------------------------------------
+   nav — Sticky navigation with blur backdrop
+   -------------------------------------------------------------------------- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 247, 242, 0.85);
+  border-bottom: 1px solid rgba(30, 20, 16, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll margin — compensate for sticky nav height
+   -------------------------------------------------------------------------- */
+section {
+  scroll-margin-top: 4rem;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+footer {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--color-text-secondary);
+  font-size: var(--size-sm);
+  border-top: 1px solid var(--color-beige-200);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — Mobile (<768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  section {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+    padding-inline: var(--space-md);
+  }
+
+  #hero {
+    padding-inline: var(--space-md);
+    min-height: 100svh; /* Use svh on mobile to account for browser chrome */
+  }
+
+  #about .about-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+  }
+
+  #projects .projects-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}

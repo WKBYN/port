@@ -1,0 +1,860 @@
+/* ==========================================================================
+   Components — Personal Portfolio
+   Buttons, ProjectCard, SkillTag, nav, interactive elements.
+   Requirements: 7.2, 7.3, 7.4, 8.1, 10.1, 10.2, 10.3, 11.1, 11.2, 14.2
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Buttons — Pill-shaped
+   Requirements: 10.1, 10.2, 10.3
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-pill);   /* always use token, never hardcode */
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  text-decoration: none;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn-primary {
+  background: var(--color-brown-800);
+  color: var(--color-text-on-dark);
+  border-color: var(--color-brown-800);
+}
+
+.btn-primary:hover {
+  background: var(--color-brown-700);
+  border-color: var(--color-brown-700);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-brown-800);
+  border-color: var(--color-brown-800);
+}
+
+.btn-secondary:hover {
+  background: var(--color-brown-800);
+  color: var(--color-text-on-dark);
+}
+
+.btn-small {
+  font-size: 0.875rem;
+  padding: 0.5rem 1.2rem;
+}
+
+/* Focus visible — keyboard navigation indicator (Requirements: 11.1, 11.2) */
+.btn:focus-visible {
+  outline: 3px solid var(--color-accent-warm);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   ProjectCard
+   Requirements: 7.2, 7.3, 7.4
+   -------------------------------------------------------------------------- */
+
+.project-card {
+  background: var(--color-beige-100);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Keyboard focus indicator for card (Requirements: 11.1, 11.2) */
+.project-card:focus-within {
+  outline: 3px solid var(--color-accent-warm);
+  outline-offset: 2px;
+}
+
+.project-card__image,
+.project-card__visual {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  background-color: var(--color-beige-200);
+}
+
+.project-card__visual {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-beige-200);
+}
+
+.project-card__visual::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 48px rgba(17, 24, 39, 0.16);
+}
+
+.project-card__visual span {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border-radius: 0.35rem;
+  background: rgba(31, 41, 55, 0.12);
+}
+
+.project-card__visual span:nth-child(1) {
+  left: 18%;
+  top: 24%;
+  width: 36%;
+  height: 10%;
+  background: rgba(31, 41, 55, 0.82);
+}
+
+.project-card__visual span:nth-child(2) {
+  left: 18%;
+  top: 43%;
+  width: 64%;
+  height: 12%;
+}
+
+.project-card__visual span:nth-child(3) {
+  left: 18%;
+  top: 64%;
+  width: 48%;
+  height: 12%;
+}
+
+.project-card__visual--alpha {
+  background:
+    linear-gradient(135deg, rgba(20, 184, 166, 0.25), rgba(244, 114, 182, 0.24)),
+    var(--color-beige-200);
+}
+
+.project-card__visual--beta {
+  background:
+    linear-gradient(135deg, rgba(99, 102, 241, 0.24), rgba(20, 184, 166, 0.22)),
+    var(--color-beige-200);
+}
+
+.project-card__visual--gamma {
+  background:
+    linear-gradient(135deg, rgba(251, 146, 60, 0.28), rgba(20, 184, 166, 0.18)),
+    var(--color-beige-200);
+}
+
+.project-card__visual--beta span:nth-child(2) {
+  height: 28%;
+  background:
+    linear-gradient(to top, rgba(20, 184, 166, 0.8) 0 38%, transparent 38% 100%),
+    linear-gradient(to right, rgba(31, 41, 55, 0.12) 0 18%, transparent 18% 28%, rgba(31, 41, 55, 0.12) 28% 46%, transparent 46% 56%, rgba(31, 41, 55, 0.12) 56% 76%, transparent 76% 100%);
+}
+
+.project-card__visual--gamma span:nth-child(2),
+.project-card__visual--gamma span:nth-child(3) {
+  width: 28%;
+  height: 26%;
+}
+
+.project-card__visual--gamma span:nth-child(3) {
+  left: 54%;
+  top: 43%;
+}
+
+.project-card__body {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.2;
+}
+
+.project-card__desc {
+  color: var(--color-text-secondary);
+  font-size: var(--size-body);
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.project-card__links {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Tags — Base .tag and .skill-tag variants
+   Requirements: 8.1
+   -------------------------------------------------------------------------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);   /* always use token */
+  background: var(--color-beige-200);
+  color: var(--color-text-secondary);
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* SkillTag — slightly larger padding than .tag */
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-pill);   /* always use token */
+  background: var(--color-beige-200);
+  color: var(--color-text-secondary);
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  line-height: 1;
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast);
+}
+
+/* SkillTag category variants */
+.skill-tag[data-category="frontend"] {
+  background: var(--color-accent-light);
+  color: var(--color-brown-800);
+}
+
+.skill-tag[data-category="backend"] {
+  background: var(--color-beige-300);
+  color: var(--color-brown-800);
+}
+
+.skill-tag[data-category="tool"] {
+  background: var(--color-beige-200);
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section Components
+   Requirements: 2.4
+   -------------------------------------------------------------------------- */
+
+.hero-greeting {
+  font-size: var(--size-body);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: var(--size-hero);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+  line-height: 1.1;
+}
+
+.hero-title-line {
+  font-family: var(--font-display);
+  font-size: var(--size-h2);
+  color: var(--color-text-secondary);
+  min-height: 2.5rem; /* Prevent layout shift during typing animation */
+  display: flex;
+  align-items: center;
+}
+
+/* Blinking cursor for typing effect */
+.hero-cursor {
+  display: inline-block;
+  animation: blink 1s step-start infinite;
+  margin-left: 2px;
+  line-height: 1;
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-xl);
+}
+
+/* Background decorative blob — parallax target, visually inert */
+.hero-bg-decoration {
+  position: absolute;
+  top: -10%;
+  right: -15%;
+  width: clamp(300px, 50vw, 600px);
+  height: clamp(300px, 50vw, 600px);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent-light), var(--color-beige-200));
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+  will-change: transform; /* hint to compositor during parallax */
+}
+
+/* --------------------------------------------------------------------------
+   About Section Components
+   -------------------------------------------------------------------------- */
+
+.about-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--color-beige-200);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-highlights {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+/* Each highlight rendered as a pill badge (reuse .tag styles) */
+.about-highlights li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-beige-200);
+  color: var(--color-text-secondary);
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+}
+
+/* --------------------------------------------------------------------------
+   Section Headings
+   -------------------------------------------------------------------------- */
+
+section h2 {
+  font-family: var(--font-display);
+  font-size: var(--size-h2);
+  color: var(--color-text-primary);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-2xl);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Intro Overlay — Luxury Minimalist
+   -------------------------------------------------------------------------- */
+
+/* Name text — centered, elegant serif, fades in */
+.intro-name-wrap {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.intro-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  color: #6B4F3A;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  animation: intro-name-fadein 2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+  display: inline-block;
+}
+
+@keyframes intro-name-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Target character — no special style, just a reference anchor for JS */
+#intro-target-char {
+  display: inline;
+}
+
+/* Intro canvas — covers full overlay */
+#intro-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Sparkle container */
+#intro-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Individual sparkle dot — position set by JS */
+.intro-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #6B4F3A;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  animation: sparkle-bloom 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sparkle-bloom {
+  0%   { opacity: 0;    transform: translate(-50%, -50%) scale(0); }
+  30%  { opacity: 0.7;  transform: translate(-50%, -50%) scale(1); }
+  70%  { opacity: 0.5;  transform: translate(var(--sx), var(--sy)) scale(0.8); }
+  100% { opacity: 0;    transform: translate(var(--sx), var(--sy)) scale(0); }
+}
+
+/* --------------------------------------------------------------------------
+   Blink keyframe (used by .hero-cursor)
+   -------------------------------------------------------------------------- */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   About Section — Avatar initials
+   -------------------------------------------------------------------------- */
+
+.about-body {
+  flex: 1;
+  min-width: 200px;
+}
+
+.about-bio {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.about-avatar-initials {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: var(--weight-bold);
+  color: var(--color-brown-800);
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Work Experience — Vertical Timeline
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   Work Experience — Vertical Timeline
+   -------------------------------------------------------------------------- */
+
+.timeline {
+  position: relative;
+  max-width: 640px;
+  padding-left: 3.5rem;  /* enough room for dot + glow ring */
+}
+
+/* Track line — full height */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 9px;             /* centre of 20px dot */
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: var(--color-beige-300);
+  border-radius: 2px;
+}
+
+/* Individual entry */
+.timeline-item {
+  position: relative;
+  padding-bottom: var(--space-3xl);
+  /* Start hidden for entrance animation */
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Entrance: when .is-visible added by IntersectionObserver */
+.timeline-item.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger each item slightly via inline transition-delay set by JS data-delay */
+
+/* Dot — always dark filled */
+.timeline-dot {
+  position: absolute;
+  left: calc(-3.5rem + 0px);  /* aligns with track centre */
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-brown-800);
+  border: 2px solid var(--color-brown-800);
+  box-shadow: none;
+  transition: box-shadow 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+}
+
+/* Ring pulses outward on scroll arrival */
+.timeline-item.is-visible .timeline-dot {
+  box-shadow:
+    0 0 0 5px var(--color-beige-100),
+    0 0 0 9px var(--color-beige-200),
+    0 0 0 12px rgba(92, 61, 46, 0.12);
+}
+
+/* Connector segment between dots — lights up with parent item */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: calc(-3.5rem + 9px);  /* track centre */
+  top: 22px;
+  width: 2px;
+  height: calc(100% - 22px);
+  background: var(--color-beige-300);
+  transition: background-color 600ms ease 300ms;
+  z-index: 0;
+}
+
+.timeline-item:last-child::after {
+  display: none;
+}
+
+.timeline-item.is-visible::after {
+  background: var(--color-brown-700);
+}
+
+/* Period label */
+.timeline-period {
+  display: inline-block;
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-accent-warm);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+/* Role */
+.timeline-role {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-bottom: var(--space-xs);
+}
+
+/* Company */
+.timeline-company {
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-sm);
+}
+
+/* Description */
+.timeline-desc {
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+/* Tags */
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 767px) {
+  .timeline {
+    padding-left: 2.75rem;
+  }
+
+  .timeline::before {
+    left: 9px;
+  }
+
+  .timeline-dot {
+    left: calc(-2.75rem + 0px);
+  }
+
+  .timeline-item::after {
+    left: calc(-2.75rem + 9px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Contact Section
+   Requirements: 11.3, 13.3
+   -------------------------------------------------------------------------- */
+
+.contact-subtitle {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2xl);
+  font-size: var(--size-h3);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-text-secondary);
+}
+
+.contact-info-item span {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-card);
+  background: var(--color-accent-light);
+  color: var(--color-brown-800);
+  font-size: 0.75rem;
+  font-weight: var(--weight-bold);
+  flex-shrink: 0;
+}
+
+.contact-info-item a {
+  color: var(--color-brown-800);
+  text-decoration: none;
+}
+
+.contact-info-item a:hover {
+  text-decoration: underline;
+}
+
+.contact-info-item a:focus-visible {
+  outline: 3px solid var(--color-accent-warm);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.contact-input {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-input);
+  border: 1.5px solid var(--color-beige-300);
+  background: var(--color-beige-50);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  color: var(--color-text-primary);
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast),
+              outline var(--transition-fast);
+}
+
+.contact-input:focus {
+  outline: 3px solid var(--color-accent-warm);
+  outline-offset: 2px;
+  border-color: var(--color-accent-warm);
+}
+
+/* Textarea — large radius (pill doesn't render well on tall elements) */
+.contact-textarea {
+  border-radius: 1.25rem;
+  resize: vertical;
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+}
+
+.contact-form-status {
+  min-height: 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: var(--size-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Nav
+   -------------------------------------------------------------------------- */
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0.6rem var(--space-xl);
+}
+
+/* Logo — plain text, no pill */
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: var(--weight-bold);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.nav-logo:focus-visible {
+  outline: 3px solid var(--color-accent-warm);
+  outline-offset: 3px;
+  border-radius: var(--radius-pill);
+}
+
+/*
+ * Nav links group — outer container pill (the white/beige capsule that
+ * wraps ALL links, like in the reference screenshot).
+ */
+.nav-links {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--color-beige-100);
+  border: 1.5px solid var(--color-beige-200);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+}
+
+/*
+ * Nav links group — single outer capsule
+ * Active = bold + dark. No fill, no underline, no separate pill.
+ */
+.nav-links {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: var(--color-beige-100);
+  border: 1.5px solid var(--color-beige-200);
+  border-radius: var(--radius-pill);
+  padding: 5px 8px;
+}
+
+/* Nav link — default state */
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 1.2rem;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: var(--weight-regular);
+  background: transparent;
+  transition: color 200ms ease, background-color 200ms ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Hover — subtle tint */
+.nav-links a:hover {
+  color: var(--color-brown-800);
+  background: rgba(61, 43, 31, 0.06);
+}
+
+/* Active — bold dark text only, no fill */
+.nav-links a.is-active {
+  color: var(--color-brown-900);
+  font-weight: var(--weight-bold);
+}
+
+.nav-links a:focus-visible {
+  outline: 3px solid var(--color-accent-warm);
+  outline-offset: 2px;
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 767px) {
+  .nav-inner {
+    padding: 0.5rem var(--space-md);
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    padding: 2px;
+    gap: 1px;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    padding: 0.26rem 0.65rem;
+  }
+
+  .contact-form .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio cá nhân của Nguyễn Hoàng Nam, frontend developer tập trung vào giao diện web nhanh, rõ ràng và dễ dùng." />
+  <title>Nguyễn Hoàng Nam — Frontend Developer</title>
+
+  <!-- =====================================================================
+       Google Fonts — Playfair Display (display) + Inter (body)
+       font-display: swap prevents Flash of Invisible Text (FOIT)
+       Requirements: 9.4
+       ===================================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- =====================================================================
+       CSS — in load order
+       Requirements: 14.2
+       ===================================================================== -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- =====================================================================
+       #intro — Luxury minimalist intro screen
+       Butterfly flies from left, lands on "â" in "Trân", then fades out.
+       ===================================================================== -->
+  <div id="intro" aria-label="Intro" aria-hidden="false">
+
+    <!-- Centered name — split so JS can locate the â target letter -->
+    <div class="intro-name-wrap" aria-label="Hoàng Lê Phương Trân">
+      <span class="intro-name" id="intro-name">Hoàng Lê Phương Tr<span id="intro-target-char">â</span>n</span>
+    </div>
+
+    <canvas id="intro-canvas" aria-hidden="true"></canvas>
+
+    <!-- Sparkle container — dots injected by JS -->
+    <div id="intro-sparkles" aria-hidden="true"></div>
+
+  </div>
+
+  <!-- =====================================================================
+       Main content — hidden behind #intro overlay on load
+       ===================================================================== -->
+  <main id="main-content">
+
+    <!-- Nav -->
+    <nav aria-label="Navigation chính">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">Nam.dev</a>
+        <ul class="nav-links" role="list">
+          <li><a href="#hero">Introduction</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Work Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ==================================================================
+         #hero — Landing section
+         Requirements: 2.4, 14.1
+         ================================================================== -->
+    <section id="hero" aria-labelledby="hero-name">
+      <!-- Background decoration for parallax effect (data-animate handled by JS) -->
+      <div class="hero-bg-decoration" aria-hidden="true" data-animate></div>
+
+      <div class="hero-content">
+        <!-- Hero elements are animated by animateHeroEntrance() in JS — no data-animate -->
+        <p class="hero-greeting">Xin chào, tôi là</p>
+        <h1 id="hero-name">
+          <span class="hero-name">Nguyễn Hoàng Nam</span>
+        </h1>
+        <p class="hero-title-line" aria-live="polite">
+          <span class="hero-typing" aria-label="Tiêu đề nghề nghiệp"></span><span class="hero-cursor" aria-hidden="true">|</span>
+        </p>
+        <div class="hero-cta" role="group" aria-label="Hành động chính">
+          <a href="#projects" class="btn btn-primary">Xem dự án</a>
+          <a href="#contact" class="btn btn-secondary">Liên hệ</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         #about — About me
+         Requirements: 14.1
+         ================================================================== -->
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">Về tôi</h2>
+      <div class="about-card" data-animate="fade-up">
+        <div class="about-avatar" aria-label="Ảnh đại diện">
+          <span class="about-avatar-initials">HN</span>
+        </div>
+        <div class="about-body">
+          <p class="about-bio">
+            Tôi là frontend developer thích biến ý tưởng mơ hồ thành giao diện rõ ràng,
+            nhanh và dễ dùng. Tôi quan tâm đến chi tiết nhỏ trong interaction, hiệu năng
+            tải trang và cách một sản phẩm giữ được cảm giác chuyên nghiệp khi người dùng
+            sử dụng mỗi ngày.
+          </p>
+          <ul class="about-highlights" aria-label="Điểm nổi bật">
+            <li>UI có hệ thống</li>
+            <li>Responsive chắc tay</li>
+            <li>Hiệu năng tốt</li>
+            <li>Code dễ bảo trì</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         #experience — Work Experience — vertical timeline
+         ================================================================== -->
+    <section id="experience" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Work Experience</h2>
+
+      <div class="timeline">
+
+        <article class="timeline-item" data-animate="fade-up">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <span class="timeline-period">01/2023 — Present</span>
+            <h3 class="timeline-role">Owner &amp; Operator of Chabum</h3>
+            <p class="timeline-desc">
+              Vận hành và phát triển thương hiệu Chabum — quản lý toàn bộ hoạt động
+              kinh doanh, nội dung mạng xã hội và chiến lược marketing.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-animate="fade-up" data-delay="100">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <span class="timeline-period">05/2026</span>
+            <h3 class="timeline-role">Junior Content Marketing</h3>
+            <p class="timeline-company">Mămmy Vietnam</p>
+            <p class="timeline-desc">
+              Sản xuất nội dung và triển khai các chiến dịch marketing cho thương hiệu
+              mẹ và bé, tập trung vào kênh mạng xã hội và e-commerce.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-animate="fade-up" data-delay="200">
+          <div class="timeline-dot" aria-hidden="true"></div>
+          <div class="timeline-content">
+            <span class="timeline-period">01/2026 — 04/2026</span>
+            <h3 class="timeline-role">Marketing Intern</h3>
+            <p class="timeline-company">Mămmy Vietnam</p>
+            <p class="timeline-desc">
+              Hỗ trợ team marketing trong việc lên kế hoạch nội dung, chạy quảng cáo
+              và phân tích hiệu quả các chiến dịch truyền thông.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         #skills — Skills / Tech stack
+         Requirements: 8.1, 8.2, 14.1
+         ================================================================== -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Kỹ năng</h2>
+      <div class="skills-grid" role="list" aria-label="Danh sách kỹ năng">
+        <!-- Frontend skills -->
+        <span class="skill-tag" data-category="frontend" data-animate role="listitem">HTML5</span>
+        <span class="skill-tag" data-category="frontend" data-animate role="listitem">CSS3</span>
+        <span class="skill-tag" data-category="frontend" data-animate role="listitem">JavaScript</span>
+        <span class="skill-tag" data-category="frontend" data-animate role="listitem">TypeScript</span>
+        <span class="skill-tag" data-category="frontend" data-animate role="listitem">React</span>
+        <span class="skill-tag" data-category="frontend" data-animate role="listitem">Vue.js</span>
+        <!-- Backend skills -->
+        <span class="skill-tag" data-category="backend" data-animate role="listitem">Node.js</span>
+        <span class="skill-tag" data-category="backend" data-animate role="listitem">Python</span>
+        <span class="skill-tag" data-category="backend" data-animate role="listitem">REST API</span>
+        <!-- Tools -->
+        <span class="skill-tag" data-category="tool" data-animate role="listitem">Git</span>
+        <span class="skill-tag" data-category="tool" data-animate role="listitem">Figma</span>
+        <span class="skill-tag" data-category="tool" data-animate role="listitem">VS Code</span>
+        <span class="skill-tag" data-category="tool" data-animate role="listitem">Docker</span>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         #projects — Project cards
+         Requirements: 7.1, 14.1
+         ================================================================== -->
+    <section id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Dự án</h2>
+      <div class="projects-grid">
+
+        <!-- StudioFlow -->
+        <article class="project-card" data-animate="fade-up">
+          <div class="project-card__visual project-card__visual--alpha" aria-label="Minh họa giao diện SaaS dashboard" role="img">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">StudioFlow</h3>
+            <p class="project-card__desc">
+              Bảng điều khiển quản lý dự án cho studio sáng tạo, tập trung vào lịch việc,
+              tiến độ và handoff giữa thiết kế với dev.
+            </p>
+            <div class="project-card__tags" aria-label="Công nghệ sử dụng">
+              <span class="tag">React</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">CSS3</span>
+            </div>
+            <div class="project-card__links">
+              <a class="btn btn-secondary btn-small" href="#contact">Trao đổi demo</a>
+              <a class="btn btn-secondary btn-small" href="#contact">Case study</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pulse Metrics -->
+        <article class="project-card" data-animate="fade-up">
+          <div class="project-card__visual project-card__visual--beta" aria-label="Minh họa dashboard phân tích dữ liệu" role="img">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">Pulse Metrics</h3>
+            <p class="project-card__desc">
+              Dashboard phân tích dữ liệu thời gian thực với biểu đồ tương tác,
+              bộ lọc nhanh và báo cáo tối ưu cho màn hình vận hành.
+            </p>
+            <div class="project-card__tags" aria-label="Công nghệ sử dụng">
+              <span class="tag">Vue.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">REST API</span>
+            </div>
+            <div class="project-card__links">
+              <a class="btn btn-secondary btn-small" href="#contact">Trao đổi demo</a>
+              <a class="btn btn-secondary btn-small" href="#contact">Case study</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- MarketKit -->
+        <article class="project-card" data-animate="fade-up">
+          <div class="project-card__visual project-card__visual--gamma" aria-label="Minh họa trang thương mại điện tử" role="img">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">MarketKit</h3>
+            <p class="project-card__desc">
+              Giao diện thương mại điện tử với luồng xem sản phẩm, giỏ hàng
+              và trạng thái thanh toán được thiết kế rõ ràng trên mobile.
+            </p>
+            <div class="project-card__tags" aria-label="Công nghệ sử dụng">
+              <span class="tag">TypeScript</span>
+              <span class="tag">Python</span>
+              <span class="tag">Docker</span>
+            </div>
+            <div class="project-card__links">
+              <a class="btn btn-secondary btn-small" href="#contact">Trao đổi demo</a>
+              <a class="btn btn-secondary btn-small" href="#contact">Case study</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         #contact — Contact section
+         Requirements: 11.3, 14.1
+         ================================================================== -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Liên hệ</h2>
+      <div class="contact-content" data-animate="fade-up">
+        <p class="contact-subtitle">Bạn có sản phẩm cần làm gọn, đẹp và dễ dùng hơn? Mình rất sẵn lòng trao đổi.</p>
+
+        <div class="contact-grid">
+          <!-- Contact info -->
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <span aria-hidden="true">@</span>
+              <a href="mailto:hello@nam.dev">hello@nam.dev</a>
+            </div>
+            <div class="contact-info-item">
+              <span aria-hidden="true">GH</span>
+              <a href="https://github.com/" target="_blank" rel="noopener">github.com/nam-dev</a>
+            </div>
+            <div class="contact-info-item">
+              <span aria-hidden="true">IN</span>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener">linkedin.com/in/nam-dev</a>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <form class="contact-form" aria-label="Liên hệ">
+            <input
+              type="text"
+              class="contact-input"
+              placeholder="Tên của bạn"
+              required
+              aria-label="Tên"
+            />
+            <input
+              type="email"
+              class="contact-input"
+              placeholder="Email của bạn"
+              required
+              aria-label="Email"
+            />
+            <textarea
+              class="contact-input contact-textarea"
+              placeholder="Tin nhắn..."
+              rows="4"
+              required
+              aria-label="Tin nhắn"
+            ></textarea>
+            <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+            <p class="contact-form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Nguyễn Hoàng Nam — Portfolio</p>
+  </footer>
+
+  <!-- =====================================================================
+       JavaScript — deferred so DOM is ready
+       Requirements: 14.3, 14.4
+       ===================================================================== -->
+  <script src="js/intro.js" defer></script>
+  <script src="js/hero.js" defer></script>
+  <script src="js/scroll.js" defer></script>
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>
